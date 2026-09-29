@@ -9,9 +9,13 @@ load_dotenv()
 
 st.title("Assignment Bot")
 
-api_key = os.environ.get("GEMINI_API_KEY")
+with st.sidebar:
+    user_key = st.text_input("Gemini API key", type="password")
+    st.markdown("[Get a key](https://aistudio.google.com/apikey)")
+
+api_key = user_key or os.environ.get("GEMINI_API_KEY")
 if not api_key:
-    st.error("Set the GEMINI_API_KEY environment variable to start chatting.")
+    st.info("Enter your Gemini API key in the sidebar to start chatting.")
     st.stop()
 
 client = genai.Client(api_key=api_key)
