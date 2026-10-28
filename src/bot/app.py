@@ -7,7 +7,10 @@ from google.genai import types
 
 load_dotenv()
 
-st.title("Assignment Bot")
+st.set_page_config(page_title="Eswatini Revenue Authority")
+st.title("Eswatini Revenue Authority")
+
+WELCOME_MESSAGE = "Welcome to ERA… how can I help you?"
 
 with st.sidebar:
     user_key = st.text_input("Gemini API key", type="password")
@@ -22,6 +25,9 @@ client = genai.Client(api_key=api_key)
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
+
+with st.chat_message("assistant"):
+    st.markdown(WELCOME_MESSAGE)
 
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
